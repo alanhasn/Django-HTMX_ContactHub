@@ -1,0 +1,15 @@
+<tr>
+    <td>{{ contact.name }}</td>
+    <td>{{ contact.email }}</td>
+    <td>                 
+        {% if contact.phone  %}
+            {{ contact.phone }}
+        {% else %}
+            <span class="text-gray-500">No phone number</span>
+        {% endif %}              
+    </td>
+    <td>{{ contact.created_at|date:"M d,Y" }}</td>
+    <td>
+    <button class="btn btn-xs btn-error">Delete</button>
+    </td>
+</tr>
