@@ -1,62 +1,56 @@
+<!--add-contact-modal file-->
 <dialog id="contact_modal" class="modal">
-    <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">Add new Contact</h3>
+  <div class="modal-box">
+    <h3 class="font-bold text-lg mb-4">Add New Contact</h3>
 
-        <form 
-            hx-post="{% url "create-contact" %}" 
-            hx-target="#contacts-body" 
-            hx-swap="afterbegin" 
-            hx-on:success="contact_modal.close();this.rest();"
-            class="mb-4"
-        >
-            {% csrf_token %}
+    <form 
+        hx-post="{% url 'create-contact' %}"
+        hx-target="#contact-table-body"
+        hx-swap="afterbegin"
+        hx-on:success="document.getElementById('contact_modal').close(); this.reset();"
+        class="mb-4"
+    >
+      {% csrf_token %}
 
-            <div class="form-control w-full">
-                <label class="label">
-                    <span class="label-text">Name</span>
-                </label>
-                {{ form.name }}
+      <!-- Name Field -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Name</span>
+        </label>
+        {{ form.name }}
+        {% if form.name.errors %}
+          <label class="label text-error">{{ form.name.errors }}</label>
+        {% endif %}
+      </div>
 
-                {% if form.name.errors %}
-                    <label class="label-text-error">
-                    {{ form.name.errors }}
-                    </label>
-                {% endif %}
-            </div>
-            <div class="form-control w-full">
-                <label class="label">
-                    <span class="label-text">Email</span>
-                </label>
-                {{ form.email }}
+      <!-- Email Field -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Email address</span>
+        </label>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <label class="label text-error">{{ form.email.errors }}</label>
+        {% endif %}
+      </div>
 
-                {% if form.email.errors %}
-                    <label class="label-text-error">
-                    {{ form.email.errors }}
-                    </label>
-                {% endif %}
-            </div>
+      <!-- Phone Field -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Phone number</span>
+        </label>
+        {{ form.phone }}
+        {% if form.phone.errors %}
+          <label class="label text-error">{{ form.phone.errors }}</label>
+        {% endif %}
+      </div>
 
-            <div class="form-control w-full">
-                <label class="label">
-                    <span class="label-text">Phone</span>
-                </label>
-                {{ form.phone }}
+      <!-- Actions -->
+      <div class="modal-action">
+        <button type="button" class="btn" onclick="document.getElementById('contact_modal').close()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add Contact</button>
+      </div>
 
-                {% if form.phone.errors %}
-                    <label class="label-text-error">
-                    {{ form.phone.errors }}
-                    </label>
-                {% endif %}
-            </div>
-            
-            <div class="modal-action">
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Add contact</button>
-                </div>
-                <div class="mt-4">
-                    <button type="button" class="btn" onclick="contact_modal.close()">Cancel</button>
-                </div>
-            </div>
-      </form>
-    </div>
+    </form>
+  </div>
 </dialog>

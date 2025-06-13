@@ -1,15 +1,22 @@
-<tr>
-    <td>{{ contact.name }}</td>
-    <td>{{ contact.email }}</td>
-    <td>                 
-        {% if contact.phone  %}
-            {{ contact.phone }}
-        {% else %}
-            <span class="text-gray-500">No phone number</span>
-        {% endif %}              
+<tr class="hover:bg-base-100 transition-all duration-200">
+    <td class="py-3 px-4 font-medium text-base-content">
+        {{ contact.name }}
     </td>
-    <td>{{ contact.created_at|date:"M d,Y" }}</td>
-    <td>
-    <button class="btn btn-xs btn-error">Delete</button>
+    <td class="py-3 px-4 text-base-content">
+        {{ contact.email }}
+    </td>
+    <td class="py-3 px-4 text-base-content">
+        {{ contact.phone }}
+    </td>
+    <td class="py-3 px-4 text-base-content">
+        {{ contact.created_at|date:"M d, Y" }}
+    </td>
+    <td class="py-3 px-4">
+        <button class="btn btn-xs btn-error btn-outline"
+            hx-delete="{% url 'delete-contact' contact.pk %}"
+            hx-on:contact-deleted="this.closest('tr').remove();"
+            hx-confirm="Are you sure you wish to delete this contact?">
+            🗑 Delete
+        </button>
     </td>
 </tr>

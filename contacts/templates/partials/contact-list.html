@@ -1,0 +1,32 @@
+<div id="contacts-list">
+  {% if contacts %}
+    <div class="overflow-x-auto shadow-md rounded-xl border border-base-300">
+      <table class="table table-zebra w-full">
+        <thead class="bg-base-200 text-base-content">
+          <tr>
+            <th class="text-left">👤 Name</th>
+            <th class="text-left">📧 Email</th>
+            <th class="text-left">📞 Phone number</th>
+            <th class="text-left">📅 Created At</th>
+            <th class="text-left">⚙️ Actions</th>
+          </tr>
+        </thead>
+        <tbody id="contact-table-body">
+
+          {% for contact in contacts %}
+            {% include 'partials/add-contact-row.html' %}
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info mt-6 shadow-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current shrink-0" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>No contacts found. Try adding some!</span>
+    </div>
+  {% endif %}
+</div>
